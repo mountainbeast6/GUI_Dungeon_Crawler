@@ -14,8 +14,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Formatter;
 
 public class HelloController {
     boolean flipper =true;
@@ -37,6 +40,7 @@ public class HelloController {
     private Button strengthRollButton, dexterityRollButton, intelligenceRollButton, constitutionRollButton, charismaRollButton, wisdomRollButton, saveCharButton;
     @FXML
     private Label strengthValueLabel, dexterityValueLabel, intelligenceValueLabel, constitutionValueLabel, charismaValueLabel, wisdomValueLabel;
+    private File Character;
 
     @FXML
     public void initialize(){
@@ -62,9 +66,17 @@ public class HelloController {
             }
             flipper=!flipper;
         });
-//        final Image image;
+        Character = new File("character.enc");
+                if(!Character.exists()){
+                    try {
+                        Character.createNewFile();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        final Image image;
 //        try {
-//            image = new Image(new FileInputStream("CrazySmile-1.png"));
+//            image = new Image(new FileInputStream("?"));
 //        } catch (FileNotFoundException e) {
 //            throw new RuntimeException("Could Not Load Player Image");
 //        }
@@ -83,12 +95,16 @@ public class HelloController {
                 gc.setLineWidth(2);
                 gc.fillText("ur a bitch", x, y);
 
-                if(y>=gameCanvas.getHeight()||y==0)
-                    yl=!yl;
-                if(x>=gameCanvas.getHeight()||x==0)
-                 xl=!xl;
-                x += (xl) ? 1: -1;
-                y += (yl) ? 1: -1;
+                if(y>=gameCanvas.getHeight())
+                    yl=false;
+                if(y<=0)
+                    yl=true;
+                if(x>=gameCanvas.getHeight())
+                 xl=false;
+                if(x<=0)
+                    xl=true;
+                x += (xl) ? (int)(Math.random()*7-3): (int)(Math.random()*-7+3);
+                y += (yl) ? (int)(Math.random()*7-3): (int)(Math.random()*-7+3);
             }
         };
         anim.start();
@@ -186,5 +202,11 @@ public class HelloController {
         charismaRollButton.setVisible(false);
         wisdomRollButton.setVisible(false);
         editButton.setVisible(false);
+    }
+    @FXML
+    protected void onSaveMenuClick() throws FileNotFoundException {
+        Formatter output = new Formatter(Character);
+        output.format("%s,%s,%s,%s,%s,%s,%s", nameLabel.getText(), strengthValueLabel.getText(), dexterityValueLabel.getText(), constitutionValueLabel.getText(),intelligenceValueLabel.getText(), wisdomValueLabel.getText(), charismaValueLabel.getText());
+        output.close();
     }
 }
