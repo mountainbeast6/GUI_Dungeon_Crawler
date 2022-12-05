@@ -9,7 +9,7 @@
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem text="Open"/>
+                        <MenuItem text="Open" onAction="#open"/>
                         <MenuItem text="Save" onAction="#onSaveMenuClick"/>
                         <MenuItem text="Save As"/>
                         <SeparatorMenuItem  />
@@ -50,33 +50,33 @@
           <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                    <children>
-                       <Button fx:id="editButton" layoutX="260" layoutY="50" mnemonicParsing="false" prefHeight="30.0" prefWidth="13.0" text="..."/>
+                       <Button fx:id="editButton" layoutX="260" layoutY="50" mnemonicParsing="false" prefHeight="30.0" prefWidth="13.0" text="..." onAction="#editName"/>
                        <TextField fx:id="nameField" layoutX="60.0" layoutY="50" prefHeight="30.0" prefWidth="200" text="Name: "/>
                        <Label fx:id="nameLabel" layoutX="60.0" layoutY="50" prefHeight="30.0" prefWidth="200" text="Name: "/>
                        <Label fx:id="statsLabel" layoutX="10.0" layoutY="110.0" prefHeight="30.0" prefWidth="180.0" text="Character Stats" style="-fx-font-size: 18; -fx-alignment: center;"/>
 
                        <Label fx:id="strengthLabel" layoutX="0.0" layoutY="150.0" prefHeight="30.0" prefWidth="90.0" text="Strength" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="strengthValueLabel" layoutX="100.0" layoutY="150.0" prefHeight="30.0" prefWidth="50.0" text="0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="strengthValueLabel" layoutX="100.0" layoutY="150.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="strengthRollButton" layoutX="175.0" layoutY="150.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton"/>
 
                        <Label fx:id="dexterityLabel" layoutX="0.0" layoutY="200.0" prefHeight="30.0" prefWidth="90.0" text="Dexterity" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="dexterityValueLabel" layoutX="100.0" layoutY="200.0" prefHeight="30.0" prefWidth="50.0" text="0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="dexterityValueLabel" layoutX="100.0" layoutY="200.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="dexterityRollButton" layoutX="175.0" layoutY="200.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton" />
 
                        <Label fx:id="constitutionLabel" layoutX="0.0" layoutY="250.0" prefHeight="30.0" prefWidth="90.0" text="Constitution" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="constitutionValueLabel" layoutX="100.0" layoutY="250.0" prefHeight="30.0" prefWidth="50.0" text="0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="constitutionValueLabel" layoutX="100.0" layoutY="250.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="constitutionRollButton" layoutX="175.0" layoutY="250.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton" />
 
                        <Label fx:id="intelligenceLabel" layoutX="0.0" layoutY="300.0" prefHeight="30.0" prefWidth="90.0" text="Intelligence" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="intelligenceValueLabel" layoutX="100.0" layoutY="300.0" prefHeight="30.0" prefWidth="50.0" text="roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="intelligenceValueLabel" layoutX="100.0" layoutY="300.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="intelligenceRollButton" layoutX="175.0" layoutY="300.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton" />
 
                        <Label fx:id="wisdomLabel" layoutX="0.0" layoutY="350.0" prefHeight="30.0" prefWidth="90.0" text="Wisdom" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="wisdomValueLabel" layoutX="100.0" layoutY="350.0" prefHeight="30.0" prefWidth="50.0" text="0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="wisdomValueLabel" layoutX="100.0" layoutY="350.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="wisdomRollButton" layoutX="175.0" layoutY="350.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton" />
 
                        <Label fx:id="charismaLabel" layoutX="0.0" layoutY="400.0" prefHeight="30.0" prefWidth="90.0" text="Charisma" style="-fx-alignment: center-right;"/>
-                       <Label fx:id="charismaValueLabel" layoutX="100.0" layoutY="400.0" prefHeight="30.0" prefWidth="50.0" text="0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
+                       <Label fx:id="charismaValueLabel" layoutX="100.0" layoutY="400.0" prefHeight="30.0" prefWidth="50.0" text="Roll" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 3; -fx-alignment: center;"/>
                        <Button fx:id="charismaRollButton" layoutX="175.0" layoutY="400.0" prefHeight="30.0" prefWidth="50.0" text="Roll" onAction="#onRollButton"/>
                        <Button fx:id="saveCharButton" layoutX="75.0" layoutY="450.0" prefHeight="30.0" prefWidth="150.0" text="Save" onAction="#onSaveButtonClicked"/>
 

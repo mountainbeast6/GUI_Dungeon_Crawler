@@ -1,36 +1,70 @@
 package com.example.gui2022;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Camera;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Tab;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.Group;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class HelloApplication extends Application {
+    private static Stage window;
+    static Scene scene;
+    static HashSet<String> currentlyActiveKeys;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        scene = new Scene(fxmlLoader.load(), 800, 600);
+        window = primaryStage;
+        window.setTitle("Hello World");
+        window.setScene(scene);
+        prepareActionHandlers();
+        window.show();
+    }
+
+    private static void prepareActionHandlers() {
+        currentlyActiveKeys = new HashSet<String>();
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                currentlyActiveKeys.add(event.getCode().toString());
+
+            }
+        });
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                currentlyActiveKeys.remove(event.getCode().toString());
+
+            }
+        });
+    }
+
+    public static File openSaveDialog(){
+        File recordDir = new File(System.getProperty("user.home"), "/DungeonJavaFX/records");
+        if(!recordDir.exists()){
+            recordDir.mkdirs();
+        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(recordDir);
+        fileChooser.setTitle("Save");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All file", "*.*"));
+        File file = fileChooser.showSaveDialog(window);
+        return file;
+    }
+
+    public static File getSave(){
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(window);
+        return file;
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
